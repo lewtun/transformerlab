@@ -141,3 +141,4 @@ checklink/cookies.txt
 
 # HuggingFace outputs
 checkpoints/
+models/
