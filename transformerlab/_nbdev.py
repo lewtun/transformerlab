@@ -2,8 +2,10 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"QuestionAnsweringTrainer": "02_distillation.ipynb",
-         "QuestionAnsweringTrainingArguments": "02_distillation.ipynb",
+index = {"prepare_train_features": "01_question_answering.ipynb",
+         "prepare_validation_features": "01_question_answering.ipynb",
+         "QuestionAnsweringTrainingArguments": "01_question_answering.ipynb",
+         "QuestionAnsweringTrainer": "01_question_answering.ipynb",
          "DistillationTrainer": "02_distillation.ipynb",
          "DistillationTrainingArguments": "02_distillation.ipynb"}
 
