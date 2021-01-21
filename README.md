@@ -1,22 +1,24 @@
-# Transformer Lab
+# Project name here
+> Summary description here.
 
-Experiments and misadventures with Transformers.
 
-## Getting started
+This file will become your README and also the index of your documentation.
 
-To get the project up and running, create a new conda environment as follows
+## Install
+
+`pip install your_project_name`
+
+## How to use
+
+Fill me in please! Don't forget code examples:
 
 ```
-conda create --name transformerlab python=3.8 -y && conda activate transformerlab
+1+1
 ```
 
-and run
 
-```
-pip install .
-```
 
-to install the required dependencies.
 
+    2
 
 

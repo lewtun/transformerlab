@@ -1,10 +1,8 @@
 {
-  "Notebook": {
-    "Export to modules": "/export",
-    "Convert to html": "/export2html",
-    "Show doc": "/showdoc",
-    "Test functions": "/test",
-    "Core functions": "/core",
-    "Command line functions": "/cli"
+  "transformerlab": {
+    "Overview": "/",
+    "module name here": "core.html",
+    "Question Answering": "question_answering.html",
+    "distillation": "distillation.html"
   }
 }
