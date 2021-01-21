@@ -2,6 +2,6 @@
   "transformerlab": {
     "Overview": "/",
     "question_answering": "question_answering.html",
-    "distillation": "distillation.html"
+    "Distilling Transformers for Question Answering": "distillation.html"
   }
 }

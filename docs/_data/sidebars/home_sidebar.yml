@@ -13,7 +13,7 @@ entries:
       title: question_answering
       url: question_answering.html
     - output: web,pdf
-      title: distillation
+      title: Distilling Transformers for Question Answering
       url: distillation.html
     output: web
     title: transformerlab
