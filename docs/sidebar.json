@@ -1,8 +1,7 @@
 {
   "transformerlab": {
     "Overview": "/",
-    "module name here": "core.html",
-    "Question Answering": "question_answering.html",
+    "question_answering": "question_answering.html",
     "distillation": "distillation.html"
   }
 }

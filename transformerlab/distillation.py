@@ -3,8 +3,9 @@
 __all__ = ['DistillationTrainer', 'DistillationTrainingArguments']
 
 # Cell
-from .question_answering import QuestionAnsweringTrainer
+from .question_answering import *
 
+# Cell
 class DistillationTrainer(QuestionAnsweringTrainer):
     def __init__(self, *args, teacher_model=None, **kwargs):
         super().__init__(*args, **kwargs)

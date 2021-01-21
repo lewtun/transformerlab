@@ -10,10 +10,7 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: module name here
-      url: core.html
-    - output: web,pdf
-      title: Question Answering
+      title: question_answering
       url: question_answering.html
     - output: web,pdf
       title: distillation
