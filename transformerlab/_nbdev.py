@@ -2,9 +2,13 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {}
+index = {"QuestionAnsweringTrainer": "02_distillation.ipynb",
+         "QuestionAnsweringTrainingArguments": "02_distillation.ipynb",
+         "DistillationTrainer": "02_distillation.ipynb",
+         "DistillationTrainingArguments": "02_distillation.ipynb"}
 
-modules = []
+modules = ["question_answering.py",
+           "distillation.py"]
 
 doc_url = "https://lewtun.github.io/transformerlab/"
 
