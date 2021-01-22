@@ -10,10 +10,10 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: question_answering
-      url: question_answering.html
+      title: Question Answering
+      url: question-answering.html
     - output: web,pdf
-      title: Distilling Transformers for Question Answering
+      title: Distilling Transformers
       url: distillation.html
     output: web
     title: transformerlab
