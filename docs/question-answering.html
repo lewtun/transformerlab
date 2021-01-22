@@ -26,6 +26,66 @@ nb_path: "01_question-answering.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+
+ 
+ 
+<div id="5bb321e7-9d6f-438d-96d4-230dd7615f17"></div>
+<div class="output_subarea output_widget_view ">
+<script type="text/javascript">
+var element = $('#5bb321e7-9d6f-438d-96d4-230dd7615f17');
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "1bd407ae8c2e477e8380fef4ad84eda8"}
+</script>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+
+ 
+ 
+<div id="206a1e1c-fdb7-4990-80f8-4cd0838e0dad"></div>
+<div class="output_subarea output_widget_view ">
+<script type="text/javascript">
+var element = $('#206a1e1c-fdb7-4990-80f8-4cd0838e0dad');
+</script>
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "d790cf2f2c0a4434859c189e8ffa3070"}
+</script>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -59,7 +119,7 @@ nb_path: "01_question-answering.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="prepare_train_features" class="doc_header"><code>prepare_train_features</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/question_answering.py#L14" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prepare_train_features</code>(<strong><code>examples</code></strong>, <strong><code>tokenizer</code></strong>, <strong><code>pad_on_right</code></strong>, <strong><code>max_length</code></strong>, <strong><code>doc_stride</code></strong>)</p>
+<h4 id="prepare_train_features" class="doc_header"><code>prepare_train_features</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/question_answering.py#L15" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prepare_train_features</code>(<strong><code>examples</code></strong>, <strong><code>tokenizer</code></strong>, <strong><code>pad_on_right</code></strong>, <strong><code>max_length</code></strong>, <strong><code>doc_stride</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -90,7 +150,44 @@ nb_path: "01_question-answering.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="prepare_validation_features" class="doc_header"><code>prepare_validation_features</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/question_answering.py#L87" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prepare_validation_features</code>(<strong><code>examples</code></strong>, <strong><code>tokenizer</code></strong>, <strong><code>pad_on_right</code></strong>, <strong><code>max_length</code></strong>, <strong><code>doc_stride</code></strong>)</p>
+<h4 id="prepare_validation_features" class="doc_header"><code>prepare_validation_features</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/question_answering.py#L88" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prepare_validation_features</code>(<strong><code>examples</code></strong>, <strong><code>tokenizer</code></strong>, <strong><code>pad_on_right</code></strong>, <strong><code>max_length</code></strong>, <strong><code>doc_stride</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Metrics">Metrics<a class="anchor-link" href="#Metrics"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="squad_metrics" class="doc_header"><code>squad_metrics</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/question_answering.py#L132" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>squad_metrics</code>(<strong><code>p</code></strong>:<code>EvalPrediction</code>)</p>
 </blockquote>
 
 </div>
@@ -127,7 +224,7 @@ nb_path: "01_question-answering.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="QuestionAnsweringTrainingArguments" class="doc_header"><code>class</code> <code>QuestionAnsweringTrainingArguments</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/question_answering.py#L129" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>QuestionAnsweringTrainingArguments</code>(<strong>*<code>args</code></strong>, <strong><code>max_length</code></strong>=<em><code>384</code></em>, <strong><code>doc_stride</code></strong>=<em><code>128</code></em>, <strong><code>version_2_with_negative</code></strong>=<em><code>False</code></em>, <strong><code>null_score_diff_threshold</code></strong>=<em><code>0.0</code></em>, <strong><code>n_best_size</code></strong>=<em><code>20</code></em>, <strong><code>max_answer_length</code></strong>=<em><code>30</code></em>, <strong>**<code>kwargs</code></strong>) :: <code>TrainingArguments</code></p>
+<h2 id="QuestionAnsweringTrainingArguments" class="doc_header"><code>class</code> <code>QuestionAnsweringTrainingArguments</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/question_answering.py#L136" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>QuestionAnsweringTrainingArguments</code>(<strong>*<code>args</code></strong>, <strong><code>max_length</code></strong>=<em><code>384</code></em>, <strong><code>doc_stride</code></strong>=<em><code>128</code></em>, <strong><code>version_2_with_negative</code></strong>=<em><code>False</code></em>, <strong><code>null_score_diff_threshold</code></strong>=<em><code>0.0</code></em>, <strong><code>n_best_size</code></strong>=<em><code>20</code></em>, <strong><code>max_answer_length</code></strong>=<em><code>30</code></em>, <strong>**<code>kwargs</code></strong>) :: <code>TrainingArguments</code></p>
 </blockquote>
 <p>TrainingArguments is the subset of the arguments we use in our example scripts <strong>which relate to the training loop
 itself</strong>.</p>
@@ -303,10 +400,7 @@ label_smoothing_factor (:obj:`float`, `optional`, defaults to 0.0):
     label_smoothing_factor + label_smoothing_factor/num_labels` respectively.
 adafactor (:obj:`bool`, `optional`, defaults to :obj:`False`):
     Whether or not to use the :class:`~transformers.Adafactor` optimizer instead of
-    :class:`~transformers.AdamW`.
-group_by_length (:obj:`bool`, `optional`, defaults to :obj:`False`):
-    Whether or not to group together samples of roughly the same legnth in the training dataset (to minimize
-    padding applied and be more efficient). Only useful if applying dynamic padding.</code></pre>
+    :class:`~transformers.AdamW`.</code></pre>
 
 </div>
 
@@ -336,7 +430,7 @@ group_by_length (:obj:`bool`, `optional`, defaults to :obj:`False`):
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="QuestionAnsweringTrainer" class="doc_header"><code>class</code> <code>QuestionAnsweringTrainer</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/question_answering.py#L142" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>QuestionAnsweringTrainer</code>(<strong>*<code>args</code></strong>, <strong><code>eval_examples</code></strong>=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>) :: <code>Trainer</code></p>
+<h2 id="QuestionAnsweringTrainer" class="doc_header"><code>class</code> <code>QuestionAnsweringTrainer</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/question_answering.py#L149" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>QuestionAnsweringTrainer</code>(<strong>*<code>args</code></strong>, <strong><code>eval_examples</code></strong>=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>) :: <code>Trainer</code></p>
 </blockquote>
 <p>Trainer is a simple but feature-complete training and eval loop for PyTorch, optimized for 🤗 Transformers.</p>
 <p>Args:
@@ -417,4 +511,8 @@ optimizers (:obj:`Tuple[torch.optim.Optimizer, torch.optim.lr_scheduler.LambdaLR
 
 </div>
  
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"3e74575ade2a43278d185ed6f9e2ed20": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "6907aabcb1fe4aa2946443e3181d995b": {"model_name": "ProgressStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "bar_color": null, "description_width": "initial"}}, "cc9758aa9806465aba89bbb05807d63c": {"model_name": "FloatProgressModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ProgressView", "bar_style": "success", "description": "Downloading: ", "description_tooltip": null, "layout": "IPY_MODEL_3e74575ade2a43278d185ed6f9e2ed20", "max": 1553.0, "min": 0.0, "orientation": "horizontal", "style": "IPY_MODEL_6907aabcb1fe4aa2946443e3181d995b", "value": 1553.0}}, "7c803941a04c4b498147bc7af9cb706f": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "4ca56ac54e944c4b9cd27730dbf41667": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "69817981760a46bf8c73556259427301": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HTMLView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_7c803941a04c4b498147bc7af9cb706f", "placeholder": "\u200b", "style": "IPY_MODEL_4ca56ac54e944c4b9cd27730dbf41667", "value": " 4.02k/? [00:00&lt;00:00, 5.41kB/s]"}}, "93fba5cdc15a4e268c33503783459edf": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "1bd407ae8c2e477e8380fef4ad84eda8": {"model_name": "HBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_cc9758aa9806465aba89bbb05807d63c", "IPY_MODEL_69817981760a46bf8c73556259427301"], "layout": "IPY_MODEL_93fba5cdc15a4e268c33503783459edf"}}, "d0de15b20d7c450496407d7303fcd170": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "607202dd1dbc413894673bca37106e04": {"model_name": "ProgressStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "bar_color": null, "description_width": "initial"}}, "cb5d3857fc1f48dda1cba087194bb36a": {"model_name": "FloatProgressModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ProgressView", "bar_style": "success", "description": "Downloading: ", "description_tooltip": null, "layout": "IPY_MODEL_d0de15b20d7c450496407d7303fcd170", "max": 1132.0, "min": 0.0, "orientation": "horizontal", "style": "IPY_MODEL_607202dd1dbc413894673bca37106e04", "value": 1132.0}}, "701ad3be573242db883944d56993819e": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "642f4810bbc14b2184bed6bf0b2f14f4": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "4f981f4f83c946b389b0912df802af1d": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HTMLView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_701ad3be573242db883944d56993819e", "placeholder": "\u200b", "style": "IPY_MODEL_642f4810bbc14b2184bed6bf0b2f14f4", "value": " 3.35k/? [00:00&lt;00:00, 30.0kB/s]"}}, "2bc0474ec8fd4e119bfab9aad34b0d85": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d790cf2f2c0a4434859c189e8ffa3070": {"model_name": "HBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_cb5d3857fc1f48dda1cba087194bb36a", "IPY_MODEL_4f981f4f83c946b389b0912df802af1d"], "layout": "IPY_MODEL_2bc0474ec8fd4e119bfab9aad34b0d85"}}}, "version_major": 2, "version_minor": 0}
+</script>
 

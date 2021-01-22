@@ -4,13 +4,16 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"prepare_train_features": "01_question-answering.ipynb",
          "prepare_validation_features": "01_question-answering.ipynb",
+         "squad_metrics": "01_question-answering.ipynb",
+         "metric": "01_question-answering.ipynb",
          "QuestionAnsweringTrainingArguments": "01_question-answering.ipynb",
          "QuestionAnsweringTrainer": "01_question-answering.ipynb",
          "DistillationTrainer": "02_distillation.ipynb",
          "DistillationTrainingArguments": "02_distillation.ipynb"}
 
 modules = ["question_answering.py",
-           "distillation.py"]
+           "distillation.py",
+           "None.py"]
 
 doc_url = "https://lewtun.github.io/transformerlab/"
 
