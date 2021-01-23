@@ -143,3 +143,4 @@ checklink/cookies.txt
 checkpoints/
 models/
 squad/
+runs/
