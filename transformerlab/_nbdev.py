@@ -12,8 +12,7 @@ index = {"prepare_train_features": "01_question-answering.ipynb",
          "DistillationTrainingArguments": "02_distillation.ipynb"}
 
 modules = ["question_answering.py",
-           "distillation.py",
-           "None.py"]
+           "distillation.py"]
 
 doc_url = "https://lewtun.github.io/transformerlab/"
 
