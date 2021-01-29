@@ -13,8 +13,11 @@ entries:
       title: Question Answering
       url: question-answering.html
     - output: web,pdf
-      title: Distilling Transformers
+      title: Distilling Transformers for Question Answering
       url: distillation.html
+    - output: web,pdf
+      title: Pruning Transformers
+      url: movement-pruning.html
     output: web
     title: transformerlab
   output: web

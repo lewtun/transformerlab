@@ -1,6 +1,6 @@
 ---
 
-title: Distilling Transformers
+title: Distilling Transformers for Question Answering
 
 
 keywords: fastai
@@ -135,32 +135,6 @@ nb_path: "02_distillation.ipynb"
 </div>
 </div>
 
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Helper-functions">Helper functions<a class="anchor-link" href="#Helper-functions"> </a></h2>
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">metric</span> <span class="o">=</span> <span class="n">load_metric</span><span class="p">(</span><span class="s2">&quot;squad&quot;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">compute_metrics</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="n">EvalPrediction</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">metric</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">predictions</span><span class="o">=</span><span class="n">p</span><span class="o">.</span><span class="n">predictions</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="n">p</span><span class="o">.</span><span class="n">label_ids</span><span class="p">)</span>
-</pre></div>
-
-    </div>
 </div>
 </div>
 
@@ -598,7 +572,7 @@ Number of raw validation examples: 53
     <span class="n">eval_examples</span><span class="o">=</span><span class="n">eval_raw_ds</span><span class="p">,</span>
     <span class="n">tokenizer</span><span class="o">=</span><span class="n">teacher_tokenizer</span><span class="p">,</span>
     <span class="n">data_collator</span><span class="o">=</span><span class="n">data_collator</span><span class="p">,</span>
-    <span class="n">compute_metrics</span><span class="o">=</span><span class="n">compute_metrics</span>
+    <span class="n">compute_metrics</span><span class="o">=</span><span class="n">squad_metrics</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -942,7 +916,7 @@ Number of raw validation examples: 53
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DistillationTrainer" class="doc_header"><code>class</code> <code>DistillationTrainer</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/distillation.py#L9" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DistillationTrainer</code>(<strong>*<code>args</code></strong>, <strong><code>teacher_model</code></strong>=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>) :: <a href="/transformerlab/question_answering.html#QuestionAnsweringTrainer"><code>QuestionAnsweringTrainer</code></a></p>
+<h2 id="DistillationTrainer" class="doc_header"><code>class</code> <code>DistillationTrainer</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/distillation.py#L9" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DistillationTrainer</code>(<strong>*<code>args</code></strong>, <strong><code>teacher_model</code></strong>=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>) :: <a href="/transformerlab/question-answering.html#QuestionAnsweringTrainer"><code>QuestionAnsweringTrainer</code></a></p>
 </blockquote>
 <p>Trainer is a simple but feature-complete training and eval loop for PyTorch, optimized for 🤗 Transformers.</p>
 <p>Args:
@@ -1038,7 +1012,7 @@ optimizers (:obj:`Tuple[torch.optim.Optimizer, torch.optim.lr_scheduler.LambdaLR
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DistillationTrainingArguments" class="doc_header"><code>class</code> <code>DistillationTrainingArguments</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/distillation.py#L63" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DistillationTrainingArguments</code>(<strong>*<code>args</code></strong>, <strong><code>alpha_ce</code></strong>=<em><code>0.5</code></em>, <strong><code>alpha_squad</code></strong>=<em><code>0.5</code></em>, <strong><code>temperature</code></strong>=<em><code>2.0</code></em>, <strong>**<code>kwargs</code></strong>) :: <a href="/transformerlab/question_answering.html#QuestionAnsweringTrainingArguments"><code>QuestionAnsweringTrainingArguments</code></a></p>
+<h2 id="DistillationTrainingArguments" class="doc_header"><code>class</code> <code>DistillationTrainingArguments</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/distillation.py#L63" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DistillationTrainingArguments</code>(<strong>*<code>args</code></strong>, <strong><code>alpha_ce</code></strong>=<em><code>0.5</code></em>, <strong><code>alpha_squad</code></strong>=<em><code>0.5</code></em>, <strong><code>temperature</code></strong>=<em><code>2.0</code></em>, <strong>**<code>kwargs</code></strong>) :: <a href="/transformerlab/question-answering.html#QuestionAnsweringTrainingArguments"><code>QuestionAnsweringTrainingArguments</code></a></p>
 </blockquote>
 <p>TrainingArguments is the subset of the arguments we use in our example scripts <strong>which relate to the training loop
 itself</strong>.</p>
@@ -1214,10 +1188,7 @@ label_smoothing_factor (:obj:`float`, `optional`, defaults to 0.0):
     label_smoothing_factor + label_smoothing_factor/num_labels` respectively.
 adafactor (:obj:`bool`, `optional`, defaults to :obj:`False`):
     Whether or not to use the :class:`~transformers.Adafactor` optimizer instead of
-    :class:`~transformers.AdamW`.
-group_by_length (:obj:`bool`, `optional`, defaults to :obj:`False`):
-    Whether or not to group together samples of roughly the same legnth in the training dataset (to minimize
-    padding applied and be more efficient). Only useful if applying dynamic padding.</code></pre>
+    :class:`~transformers.AdamW`.</code></pre>
 
 </div>
 
@@ -1323,7 +1294,7 @@ Number of raw validation examples: 10570
     <span class="n">eval_examples</span><span class="o">=</span><span class="n">eval_raw_ds</span><span class="p">,</span>
     <span class="n">tokenizer</span><span class="o">=</span><span class="n">student_tokenizer</span><span class="p">,</span>
     <span class="n">data_collator</span><span class="o">=</span><span class="n">data_collator</span><span class="p">,</span>
-    <span class="n">compute_metrics</span><span class="o">=</span><span class="n">compute_metrics</span>
+    <span class="n">compute_metrics</span><span class="o">=</span><span class="n">squad_metrics</span>
 <span class="p">)</span>
 </pre></div>
 
