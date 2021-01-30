@@ -223,8 +223,6 @@ class QuestionAnsweringTrainer(Trainer):
             features_per_example[example_id_to_index[feature["example_id"]]].append(i)
 
         all_predictions = collections.OrderedDict()
-        if self.args.version_2_with_negative:
-            scores_diff_json = collections.OrderedDict()
 
         for example_index, example in enumerate(tqdm(examples)):
             feature_indices = features_per_example[example_index]
@@ -300,7 +298,6 @@ class QuestionAnsweringTrainer(Trainer):
                 best_non_null_pred = predictions[i]
 
                 score_diff = null_score - best_non_null_pred["start_logit"] - best_non_null_pred["end_logit"]
-                scores_diff_json[example["id"]] = float(score_diff)  # To be JSON-serializable.
                 if score_diff > self.args.null_score_diff_threshold:
                     all_predictions[example["id"]] = ""
                 else:
