@@ -8,8 +8,8 @@ index = {"prepare_train_features": "01_question-answering.ipynb",
          "metric": "01_question-answering.ipynb",
          "QuestionAnsweringTrainingArguments": "01_question-answering.ipynb",
          "QuestionAnsweringTrainer": "01_question-answering.ipynb",
-         "DistillationTrainer": "02_distillation.ipynb",
-         "DistillationTrainingArguments": "02_distillation.ipynb"}
+         "DistillationTrainingArguments": "02_distillation.ipynb",
+         "DistillationTrainer": "02_distillation.ipynb"}
 
 modules = ["question_answering.py",
            "distillation.py"]
