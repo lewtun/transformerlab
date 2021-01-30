@@ -4,15 +4,32 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"prepare_train_features": "01_question-answering.ipynb",
          "prepare_validation_features": "01_question-answering.ipynb",
+         "convert_examples_to_features": "01_question-answering.ipynb",
          "squad_metrics": "01_question-answering.ipynb",
          "metric": "01_question-answering.ipynb",
          "QuestionAnsweringTrainingArguments": "01_question-answering.ipynb",
          "QuestionAnsweringTrainer": "01_question-answering.ipynb",
          "DistillationTrainingArguments": "02_distillation.ipynb",
-         "DistillationTrainer": "02_distillation.ipynb"}
+         "DistillationTrainer": "02_distillation.ipynb",
+         "MaskedBertConfig": "03_pruning.ipynb",
+         "MaskedBertPreTrainedModel": "03_pruning.ipynb",
+         "MaskedBertModel": "03_pruning.ipynb",
+         "BertEmbeddings": "03_pruning.ipynb",
+         "BertEncoder": "03_pruning.ipynb",
+         "MaskedBertForQuestionAnswering": "03_pruning.ipynb",
+         "BertLayer": "03_pruning.ipynb",
+         "BertAttention": "03_pruning.ipynb",
+         "BertSelfAttention": "03_pruning.ipynb",
+         "MaskedLinear": "03_pruning.ipynb",
+         "BertSelfOutput": "03_pruning.ipynb",
+         "BertIntermediate": "03_pruning.ipynb",
+         "BertOutput": "03_pruning.ipynb",
+         "BertPooler": "03_pruning.ipynb",
+         "TopKBinarizer": "03_pruning.ipynb"}
 
 modules = ["question_answering.py",
-           "distillation.py"]
+           "distillation.py",
+           "pruning.py"]
 
 doc_url = "https://lewtun.github.io/transformerlab/"
 
