@@ -14,7 +14,8 @@ from transformers import TrainingArguments, Trainer, EvalPrediction, default_dat
 from datasets import load_metric
 
 # Cell
-def prepare_train_features(examples: Union[str, List[str], List[List[str]]], tokenizer: PreTrainedTokenizer, pad_on_right: bool, max_length: int=384, doc_stride: int=128):
+def prepare_train_features(examples: Union[str, List[str], List[List[str]]], tokenizer: PreTrainedTokenizer,
+                           pad_on_right: bool, max_length: int=384, doc_stride: int=128):
     "Tokenize and encode training examples in the SQuAD format"
     tokenized_examples = tokenizer(
         examples["question" if pad_on_right else "context"],
