@@ -10,7 +10,7 @@ import numpy as np
 from tqdm.auto import tqdm
 from transformers.trainer_utils import PredictionOutput
 from transformers.tokenization_utils import PreTrainedTokenizer
-from transformers import TrainingArguments, Trainer, EvalPrediction
+from transformers import TrainingArguments, Trainer, EvalPrediction, default_data_collator
 from datasets import load_metric
 
 # Cell
@@ -94,6 +94,7 @@ def prepare_validation_features(examples, tokenizer, pad_on_right, max_length, d
 # Cell
 def convert_examples_to_features(dataset, tokenizer, num_train_examples, num_eval_examples,
                                  max_length=384, doc_stride=128, seed=42):
+    "Tokenize and encode the training and validation examples in the SQuAD format"
     max_length = max_length
     doc_stride = doc_stride
     pad_on_right = tokenizer.padding_side == "right"
@@ -136,12 +137,15 @@ class QuestionAnsweringTrainingArguments(TrainingArguments):
         self.null_score_diff_threshold = null_score_diff_threshold
         self.n_best_size = n_best_size
         self.max_answer_length = max_answer_length
+        self.disable_tqdm = False
 
 # Cell
 class QuestionAnsweringTrainer(Trainer):
     def __init__(self, *args, eval_examples=None, **kwargs):
         super().__init__(*args, **kwargs)
         self.eval_examples = eval_examples
+        self.data_collator = default_data_collator
+        self.compute_metrics = squad_metrics
 
     def evaluate(self, eval_dataset=None, eval_examples=None, ignore_keys=None):
         eval_dataset = self.eval_dataset if eval_dataset is None else eval_dataset
