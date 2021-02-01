@@ -13,11 +13,14 @@ entries:
       title: Question Answering
       url: question-answering.html
     - output: web,pdf
-      title: Distilling Transformers for Question Answering
-      url: distillation.html
+      title: Weight Pruning
+      url: pruning.html
     - output: web,pdf
-      title: Pruning Transformers
-      url: movement-pruning.html
+      title: DistilBERT
+      url: experiments.distilbert.html
+    - output: web,pdf
+      title: Movement Pruning
+      url: experiments.movement-pruning.html
     output: web
     title: transformerlab
   output: web

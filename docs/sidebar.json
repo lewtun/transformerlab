@@ -2,7 +2,8 @@
   "transformerlab": {
     "Overview": "/",
     "Question Answering": "question-answering.html",
-    "Distilling Transformers for Question Answering": "distillation.html",
-    "Pruning Transformers": "movement-pruning.html"
+    "Weight Pruning": "pruning.html",
+    "DistilBERT": "experiments.distilbert.html",
+    "Movement Pruning": "experiments.movement-pruning.html"
   }
 }

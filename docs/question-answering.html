@@ -6,8 +6,8 @@ title: Question Answering
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "Functions and classes for question answering tasks"
-description: "Functions and classes for question answering tasks"
+summary: "Classes and functions for question answering tasks"
+description: "Classes and functions for question answering tasks"
 nb_path: "01_question-answering.ipynb"
 ---
 <!--
@@ -36,13 +36,13 @@ nb_path: "01_question-answering.ipynb"
 
  
  
-<div id="5bb321e7-9d6f-438d-96d4-230dd7615f17"></div>
+<div id="c85ae4c3-5c43-492c-983d-ae7aaf00276f"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#5bb321e7-9d6f-438d-96d4-230dd7615f17');
+var element = $('#c85ae4c3-5c43-492c-983d-ae7aaf00276f');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "1bd407ae8c2e477e8380fef4ad84eda8"}
+{"version_major": 2, "version_minor": 0, "model_id": "8cf9b2f9b4044a7fa4646ecdc79fde8f"}
 </script>
 </div>
 
@@ -63,13 +63,13 @@ var element = $('#5bb321e7-9d6f-438d-96d4-230dd7615f17');
 
  
  
-<div id="206a1e1c-fdb7-4990-80f8-4cd0838e0dad"></div>
+<div id="37f8085b-039c-438b-8c62-d7aba2dc682c"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#206a1e1c-fdb7-4990-80f8-4cd0838e0dad');
+var element = $('#37f8085b-039c-438b-8c62-d7aba2dc682c');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "d790cf2f2c0a4434859c189e8ffa3070"}
+{"version_major": 2, "version_minor": 0, "model_id": "dc709e26d02e468f86dd3a517c8dee6d"}
 </script>
 </div>
 
@@ -91,7 +91,33 @@ var element = $('#206a1e1c-fdb7-4990-80f8-4cd0838e0dad');
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Load-libraries">Load libraries<a class="anchor-link" href="#Load-libraries"> </a></h2>
+<p>Most of the classes and functions defined in this module are adapted from the following resources:</p>
+<ul>
+<li><a href="https://twitter.com/GuggerSylvain?s=20">Sylvain Gugger's</a> excellent <a href="https://github.com/huggingface/notebooks/blob/master/examples/question_answering.ipynb">tutorial</a> on extractive question answering</li>
+<li>The scripts and modules from the <a href="https://github.com/huggingface/transformers/tree/master/examples/question-answering">question answering examples</a> in the <code>transformers</code> repository</li>
+</ul>
+<p>Compared to the results from HuggingFace's <code>run_qa.py</code> script, this implementation agrees to within 0.5% on the SQUAD v1 dataset:</p>
+<table>
+<thead><tr>
+<th style="text-align:left">Implementation</th>
+<th style="text-align:center">Exact Match</th>
+<th style="text-align:center">F1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">HuggingFace</td>
+<td style="text-align:center">81.22</td>
+<td style="text-align:center">88.52</td>
+</tr>
+<tr>
+<td style="text-align:left">Ours</td>
+<td style="text-align:center">80.82</td>
+<td style="text-align:center">88.22</td>
+</tr>
+</tbody>
+</table>
+
 </div>
 </div>
 </div>
@@ -119,8 +145,9 @@ var element = $('#206a1e1c-fdb7-4990-80f8-4cd0838e0dad');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="prepare_train_features" class="doc_header"><code>prepare_train_features</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/question_answering.py#L15" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prepare_train_features</code>(<strong><code>examples</code></strong>, <strong><code>tokenizer</code></strong>, <strong><code>pad_on_right</code></strong>, <strong><code>max_length</code></strong>, <strong><code>doc_stride</code></strong>)</p>
+<h4 id="prepare_train_features" class="doc_header"><code>prepare_train_features</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/question_answering.py#L17" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prepare_train_features</code>(<strong><code>examples</code></strong>:<code>Union</code>[<code>str</code>, <code>List</code>[<code>str</code>], <code>List</code>[<code>List</code>[<code>str</code>]]], <strong><code>tokenizer</code></strong>:<code>PreTrainedTokenizer</code>, <strong><code>pad_on_right</code></strong>:<code>bool</code>, <strong><code>max_length</code></strong>:<code>int</code>=<em><code>384</code></em>, <strong><code>doc_stride</code></strong>:<code>int</code>=<em><code>128</code></em>)</p>
 </blockquote>
+<p>Tokenize and encode training examples in the SQuAD format</p>
 
 </div>
 
@@ -150,8 +177,9 @@ var element = $('#206a1e1c-fdb7-4990-80f8-4cd0838e0dad');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="prepare_validation_features" class="doc_header"><code>prepare_validation_features</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/question_answering.py#L88" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prepare_validation_features</code>(<strong><code>examples</code></strong>, <strong><code>tokenizer</code></strong>, <strong><code>pad_on_right</code></strong>, <strong><code>max_length</code></strong>, <strong><code>doc_stride</code></strong>)</p>
+<h4 id="prepare_validation_features" class="doc_header"><code>prepare_validation_features</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/question_answering.py#L68" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prepare_validation_features</code>(<strong><code>examples</code></strong>, <strong><code>tokenizer</code></strong>, <strong><code>pad_on_right</code></strong>, <strong><code>max_length</code></strong>, <strong><code>doc_stride</code></strong>)</p>
 </blockquote>
+<p>Tokenize and encode validation examples in the SQuAD format</p>
 
 </div>
 
@@ -166,6 +194,63 @@ var element = $('#206a1e1c-fdb7-4990-80f8-4cd0838e0dad');
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="convert_examples_to_features" class="doc_header"><code>convert_examples_to_features</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/question_answering.py#L96" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>convert_examples_to_features</code>(<strong><code>dataset</code></strong>, <strong><code>tokenizer</code></strong>, <strong><code>num_train_examples</code></strong>, <strong><code>num_eval_examples</code></strong>, <strong><code>max_length</code></strong>=<em><code>384</code></em>, <strong><code>doc_stride</code></strong>=<em><code>128</code></em>, <strong><code>seed</code></strong>=<em><code>42</code></em>)</p>
+</blockquote>
+<p>Tokenize and encode the training and validation examples in the SQuAD format</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span>
+
+<span class="n">num_train_examples</span> <span class="o">=</span> <span class="mi">800</span>
+<span class="n">num_eval_examples</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">squad_ds</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;squad&#39;</span><span class="p">)</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;distilbert-base-uncased&#39;</span><span class="p">)</span>
+<span class="n">train_ds</span><span class="p">,</span> <span class="n">eval_ds</span><span class="p">,</span> <span class="n">eval_examples</span> <span class="o">=</span> <span class="n">convert_examples_to_features</span><span class="p">(</span><span class="n">squad_ds</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">num_train_examples</span><span class="p">,</span> <span class="n">num_eval_examples</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">eval_examples</span><span class="o">.</span><span class="n">num_rows</span> <span class="o">==</span> <span class="n">num_eval_examples</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 </div>
     {% endraw %}
@@ -187,8 +272,9 @@ var element = $('#206a1e1c-fdb7-4990-80f8-4cd0838e0dad');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="squad_metrics" class="doc_header"><code>squad_metrics</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/question_answering.py#L132" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>squad_metrics</code>(<strong><code>p</code></strong>:<code>EvalPrediction</code>)</p>
+<h4 id="squad_metrics" class="doc_header"><code>squad_metrics</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/question_answering.py#L125" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>squad_metrics</code>(<strong><code>p</code></strong>:<code>EvalPrediction</code>)</p>
 </blockquote>
+<p>Compute the Exact Match and F1-score metrics on SQuAD</p>
 
 </div>
 
@@ -224,7 +310,7 @@ var element = $('#206a1e1c-fdb7-4990-80f8-4cd0838e0dad');
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="QuestionAnsweringTrainingArguments" class="doc_header"><code>class</code> <code>QuestionAnsweringTrainingArguments</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/question_answering.py#L136" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>QuestionAnsweringTrainingArguments</code>(<strong>*<code>args</code></strong>, <strong><code>max_length</code></strong>=<em><code>384</code></em>, <strong><code>doc_stride</code></strong>=<em><code>128</code></em>, <strong><code>version_2_with_negative</code></strong>=<em><code>False</code></em>, <strong><code>null_score_diff_threshold</code></strong>=<em><code>0.0</code></em>, <strong><code>n_best_size</code></strong>=<em><code>20</code></em>, <strong><code>max_answer_length</code></strong>=<em><code>30</code></em>, <strong>**<code>kwargs</code></strong>) :: <code>TrainingArguments</code></p>
+<h2 id="QuestionAnsweringTrainingArguments" class="doc_header"><code>class</code> <code>QuestionAnsweringTrainingArguments</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/question_answering.py#L130" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>QuestionAnsweringTrainingArguments</code>(<strong>*<code>args</code></strong>, <strong><code>max_length</code></strong>=<em><code>384</code></em>, <strong><code>doc_stride</code></strong>=<em><code>128</code></em>, <strong><code>version_2_with_negative</code></strong>=<em><code>False</code></em>, <strong><code>null_score_diff_threshold</code></strong>=<em><code>0.0</code></em>, <strong><code>n_best_size</code></strong>=<em><code>20</code></em>, <strong><code>max_answer_length</code></strong>=<em><code>30</code></em>, <strong>**<code>kwargs</code></strong>) :: <code>TrainingArguments</code></p>
 </blockquote>
 <p>TrainingArguments is the subset of the arguments we use in our example scripts <strong>which relate to the training loop
 itself</strong>.</p>
@@ -295,9 +381,6 @@ num_train_epochs(:obj:`float`, `optional`, defaults to 3.0):
 max_steps (:obj:`int`, `optional`, defaults to -1):
     If set to a positive number, the total number of training steps to perform. Overrides
     :obj:`num_train_epochs`.
-lr_scheduler_type (:obj:`str` or :class:`~transformers.SchedulerType`, `optional`, defaults to :obj:`"linear"`):
-    The scheduler type to use. See the documentation of :class:`~transformers.SchedulerType` for all possible
-    values.
 warmup_steps (:obj:`int`, `optional`, defaults to 0):
     Number of steps used for a linear warmup from 0 to :obj:`learning_rate`.
 logging_dir (:obj:`str`, `optional`):
@@ -321,10 +404,6 @@ fp16 (:obj:`bool`, `optional`, defaults to :obj:`False`):
 fp16_opt_level (:obj:`str`, `optional`, defaults to 'O1'):
     For :obj:`fp16` training, Apex AMP optimization level selected in ['O0', 'O1', 'O2', and 'O3']. See details
     on the `Apex documentation &lt;https://nvidia.github.io/apex/amp.html&gt;`__.
-fp16_backend (:obj:`str`, `optional`, defaults to :obj:`"auto"`):
-    The backend to use for mixed precision training. Must be one of :obj:`"auto"`, :obj:`"amp"` or
-    :obj:`"apex"`. :obj:`"auto"` will use AMP or APEX depending on the PyTorch version detected, while the
-    other choices will force the requested backend.
 local_rank (:obj:`int`, `optional`, defaults to -1):
     Rank of the process during distributed training.
 tpu_num_cores (:obj:`int`, `optional`):
@@ -384,23 +463,20 @@ greater_is_better (:obj:`bool`, `optional`):
     - :obj:`True` if :obj:`metric_for_best_model` is set to a value that isn't :obj:`"loss"` or
       :obj:`"eval_loss"`.
     - :obj:`False` if :obj:`metric_for_best_model` is not set, or set to :obj:`"loss"` or :obj:`"eval_loss"`.
+model_parallel (:obj:`bool`, `optional`, defaults to :obj:`False`):
+    If there is more than one device, whether to use model parallelism to distribute the model's modules across
+    devices or not.
 ignore_skip_data (:obj:`bool`, `optional`, defaults to :obj:`False`):
     When resuming training, whether or not to skip the epochs and batches to get the data loading at the same
     stage as in the previous training. If set to :obj:`True`, the training will begin faster (as that skipping
     step can take a long time) but will not yield the same results as the interrupted training would have.
+fp16_backend (:obj:`str`, `optional`, defaults to :obj:`"auto"`):
+    The backend to use for mixed precision training. Must be one of :obj:`"auto"`, :obj:`"amp"` or
+    :obj:`"apex"`. :obj:`"auto"` will use AMP or APEX depending on the PyTorch version detected, while the
+    other choices will force the requested backend.
 sharded_ddp (:obj:`bool`, `optional`, defaults to :obj:`False`):
     Use Sharded DDP training from `FairScale &lt;https://github.com/facebookresearch/fairscale&gt;`__ (in distributed
-    training only). This is an experimental feature.
-deepspeed (:obj:`str`, `optional`):
-    Use `Deepspeed &lt;https://github.com/microsoft/deepspeed&gt;`__. This is an experimental feature and its API may
-    evolve in the future. The value is the location of its json config file (usually ``ds_config.json``).
-label_smoothing_factor (:obj:`float`, `optional`, defaults to 0.0):
-    The label smoothing factor to use. Zero means no label smoothing, otherwise the underlying onehot-encoded
-    labels are changed from 0s and 1s to :obj:`label_smoothing_factor/num_labels` and :obj:`1 -
-    label_smoothing_factor + label_smoothing_factor/num_labels` respectively.
-adafactor (:obj:`bool`, `optional`, defaults to :obj:`False`):
-    Whether or not to use the :class:`~transformers.Adafactor` optimizer instead of
-    :class:`~transformers.AdamW`.</code></pre>
+    training only). This is an experimental feature.</code></pre>
 
 </div>
 
@@ -430,7 +506,7 @@ adafactor (:obj:`bool`, `optional`, defaults to :obj:`False`):
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="QuestionAnsweringTrainer" class="doc_header"><code>class</code> <code>QuestionAnsweringTrainer</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/question_answering.py#L149" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>QuestionAnsweringTrainer</code>(<strong>*<code>args</code></strong>, <strong><code>eval_examples</code></strong>=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>) :: <code>Trainer</code></p>
+<h2 id="QuestionAnsweringTrainer" class="doc_header"><code>class</code> <code>QuestionAnsweringTrainer</code><a href="https://github.com/lewtun/transformerlab/tree/master/transformerlab/question_answering.py#L144" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>QuestionAnsweringTrainer</code>(<strong>*<code>args</code></strong>, <strong><code>eval_examples</code></strong>=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>) :: <code>Trainer</code></p>
 </blockquote>
 <p>Trainer is a simple but feature-complete training and eval loop for PyTorch, optimized for 🤗 Transformers.</p>
 <p>Args:
@@ -478,19 +554,7 @@ callbacks (List of :obj:`~transformers.TrainerCallback`, `optional`):
 optimizers (:obj:`Tuple[torch.optim.Optimizer, torch.optim.lr_scheduler.LambdaLR`, `optional`): A tuple
     containing the optimizer and the scheduler to use. Will default to an instance of
     :class:`~transformers.AdamW` on your model and a scheduler given by
-    :func:`~transformers.get_linear_schedule_with_warmup` controlled by :obj:`args`.
-
-</code></pre>
-<p>Important attributes:</p>
-
-<pre><code>- **model** -- Always points to the core model. If using a transformers model, it will be a
-  :class:`~transformers.PreTrainedModel` subclass.
-- **model_wrapped** -- Always points to the most external model in case one or more other modules wrap the
-  original model. This is the model that should be used for the forward pass. For example, under ``DeepSpeed``,
-  the inner model is wrapped in ``DeepSpeed`` and then again in ``torch.nn.DistributedDataParallel``. If the
-  inner model hasn't been wrapped, then ``self.model_wrapped`` is the same as ``self.model``.
-- **is_model_parallel** -- Whether or not a model has been switched to a model parallel mode (different from
-  data parallelism, this means some of the model layers are split on different GPUs).</code></pre>
+    :func:`~transformers.get_linear_schedule_with_warmup` controlled by :obj:`args`.</code></pre>
 
 </div>
 
@@ -509,10 +573,322 @@ optimizers (:obj:`Tuple[torch.optim.Optimizer, torch.optim.lr_scheduler.LambdaLR
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Usage">Usage<a class="anchor-link" href="#Usage"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The following example shows how the classes and functions in this module can be combined to fine-tune on the SQuAD v1 dataset. The first thing we need to do is grab the dataset:</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+
+<span class="n">squad</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;squad&#39;</span><span class="p">)</span>
+<span class="n">squad</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>DatasetDict({
+    train: Dataset({
+        features: [&#39;id&#39;, &#39;title&#39;, &#39;context&#39;, &#39;question&#39;, &#39;answers&#39;],
+        num_rows: 87599
+    })
+    validation: Dataset({
+        features: [&#39;id&#39;, &#39;title&#39;, &#39;context&#39;, &#39;question&#39;, &#39;answers&#39;],
+        num_rows: 10570
+    })
+})</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For each example, the key information is contained in the <code>context</code>, <code>question</code>, and <code>answer</code> fields:</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">squad</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;answers&#39;: {&#39;answer_start&#39;: [515], &#39;text&#39;: [&#39;Saint Bernadette Soubirous&#39;]},
+ &#39;context&#39;: &#39;Architecturally, the school has a Catholic character. Atop the Main Building\&#39;s gold dome is a golden statue of the Virgin Mary. Immediately in front of the Main Building and facing it, is a copper statue of Christ with arms upraised with the legend &#34;Venite Ad Me Omnes&#34;. Next to the Main Building is the Basilica of the Sacred Heart. Immediately behind the basilica is the Grotto, a Marian place of prayer and reflection. It is a replica of the grotto at Lourdes, France where the Virgin Mary reputedly appeared to Saint Bernadette Soubirous in 1858. At the end of the main drive (and in a direct line that connects through 3 statues and the Gold Dome), is a simple, modern stone statue of Mary.&#39;,
+ &#39;id&#39;: &#39;5733be284776f41900661182&#39;,
+ &#39;question&#39;: &#39;To whom did the Virgin Mary allegedly appear in 1858 in Lourdes France?&#39;,
+ &#39;title&#39;: &#39;University_of_Notre_Dame&#39;}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next we need to tokenize and encode these texts. The following code does the job:</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span>
+
+<span class="n">model_checkpoint</span> <span class="o">=</span> <span class="s1">&#39;bert-base-uncased&#39;</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_checkpoint</span><span class="p">)</span>
+
+<span class="n">num_train_examples</span> <span class="o">=</span> <span class="mi">1600</span>
+<span class="n">num_eval_examples</span> <span class="o">=</span> <span class="mi">320</span>
+<span class="n">train_ds</span><span class="p">,</span> <span class="n">eval_ds</span><span class="p">,</span> <span class="n">eval_examples</span> <span class="o">=</span> <span class="n">convert_examples_to_features</span><span class="p">(</span><span class="n">squad_ds</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">num_train_examples</span><span class="p">,</span> <span class="n">num_eval_examples</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The final step is to configure and instantiate the trainer using the same settings as those decribed in the <code>transformers</code> <a href="https://github.com/huggingface/transformers/tree/master/examples/question-answering#squad">examples</a>. We'll use the <code>model_init</code> argument to ensure that the model is initialised with the same random weights:</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoModelForQuestionAnswering</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running on device: </span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">model_init</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">AutoModelForQuestionAnswering</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_checkpoint</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Running on device: cuda
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then we just need to specify the hyperparameters and data collator for padding</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">3e-5</span>
+<span class="n">num_train_epochs</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">logging_steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_ds</span><span class="p">)</span> <span class="o">//</span> <span class="n">batch_size</span>
+
+<span class="n">args</span> <span class="o">=</span> <span class="n">QuestionAnsweringTrainingArguments</span><span class="p">(</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="s1">&#39;checkpoints&#39;</span><span class="p">,</span>
+    <span class="n">evaluation_strategy</span><span class="o">=</span><span class="s1">&#39;epoch&#39;</span><span class="p">,</span>
+    <span class="n">num_train_epochs</span><span class="o">=</span><span class="n">num_train_epochs</span><span class="p">,</span>
+    <span class="n">per_device_train_batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">3e-5</span><span class="p">,</span>
+    <span class="n">logging_steps</span><span class="o">=</span><span class="n">logging_steps</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">QuestionAnsweringTrainer</span><span class="p">(</span>
+    <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span>
+    <span class="n">model_init</span><span class="o">=</span><span class="n">model_init</span><span class="p">,</span>
+    <span class="n">train_dataset</span><span class="o">=</span><span class="n">train_ds</span><span class="p">,</span>
+    <span class="n">eval_dataset</span><span class="o">=</span><span class="n">eval_ds</span><span class="p">,</span>
+    <span class="n">eval_examples</span><span class="o">=</span><span class="n">eval_examples</span><span class="p">,</span>
+    <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>and perform the fine-tuning:</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">();</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+
+    <div>
+        <style>
+            /* Turns off some styling */
+            progress {
+                /* gets rid of default border in Firefox and Opera. */
+                border: none;
+                /* Needs to be in here for Safari polyfill so background images work as expected. */
+                background-size: auto;
+            }
+        </style>
+      
+      <progress value='14754' max='14754' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      [14754/14754 2:58:54, Epoch 2/2]
+    </div>
+    <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>Epoch</th>
+      <th>Training Loss</th>
+      <th>Validation Loss</th>
+      <th>Exact Match</th>
+      <th>F1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1.000000</td>
+      <td>1.266106</td>
+      <td>No log</td>
+      <td>79.309366</td>
+      <td>86.817847</td>
+    </tr>
+    <tr>
+      <td>2.000000</td>
+      <td>0.720876</td>
+      <td>No log</td>
+      <td>80.823084</td>
+      <td>88.228499</td>
+    </tr>
+  </tbody>
+</table><p>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 </div>
  
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"3e74575ade2a43278d185ed6f9e2ed20": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "6907aabcb1fe4aa2946443e3181d995b": {"model_name": "ProgressStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "bar_color": null, "description_width": "initial"}}, "cc9758aa9806465aba89bbb05807d63c": {"model_name": "FloatProgressModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ProgressView", "bar_style": "success", "description": "Downloading: ", "description_tooltip": null, "layout": "IPY_MODEL_3e74575ade2a43278d185ed6f9e2ed20", "max": 1553.0, "min": 0.0, "orientation": "horizontal", "style": "IPY_MODEL_6907aabcb1fe4aa2946443e3181d995b", "value": 1553.0}}, "7c803941a04c4b498147bc7af9cb706f": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "4ca56ac54e944c4b9cd27730dbf41667": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "69817981760a46bf8c73556259427301": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HTMLView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_7c803941a04c4b498147bc7af9cb706f", "placeholder": "\u200b", "style": "IPY_MODEL_4ca56ac54e944c4b9cd27730dbf41667", "value": " 4.02k/? [00:00&lt;00:00, 5.41kB/s]"}}, "93fba5cdc15a4e268c33503783459edf": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "1bd407ae8c2e477e8380fef4ad84eda8": {"model_name": "HBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_cc9758aa9806465aba89bbb05807d63c", "IPY_MODEL_69817981760a46bf8c73556259427301"], "layout": "IPY_MODEL_93fba5cdc15a4e268c33503783459edf"}}, "d0de15b20d7c450496407d7303fcd170": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "607202dd1dbc413894673bca37106e04": {"model_name": "ProgressStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "bar_color": null, "description_width": "initial"}}, "cb5d3857fc1f48dda1cba087194bb36a": {"model_name": "FloatProgressModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ProgressView", "bar_style": "success", "description": "Downloading: ", "description_tooltip": null, "layout": "IPY_MODEL_d0de15b20d7c450496407d7303fcd170", "max": 1132.0, "min": 0.0, "orientation": "horizontal", "style": "IPY_MODEL_607202dd1dbc413894673bca37106e04", "value": 1132.0}}, "701ad3be573242db883944d56993819e": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "642f4810bbc14b2184bed6bf0b2f14f4": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "4f981f4f83c946b389b0912df802af1d": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HTMLView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_701ad3be573242db883944d56993819e", "placeholder": "\u200b", "style": "IPY_MODEL_642f4810bbc14b2184bed6bf0b2f14f4", "value": " 3.35k/? [00:00&lt;00:00, 30.0kB/s]"}}, "2bc0474ec8fd4e119bfab9aad34b0d85": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d790cf2f2c0a4434859c189e8ffa3070": {"model_name": "HBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_cb5d3857fc1f48dda1cba087194bb36a", "IPY_MODEL_4f981f4f83c946b389b0912df802af1d"], "layout": "IPY_MODEL_2bc0474ec8fd4e119bfab9aad34b0d85"}}}, "version_major": 2, "version_minor": 0}
+{"state": {"1d2bc68dbfb74ddebb128cd63af4c390": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "dc419b60dab84016ac27411608e8adaa": {"model_name": "ProgressStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "bar_color": null, "description_width": "initial"}}, "277abfbae7f745f3a229b3ab97b35b17": {"model_name": "FloatProgressModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ProgressView", "bar_style": "success", "description": "Downloading: ", "description_tooltip": null, "layout": "IPY_MODEL_1d2bc68dbfb74ddebb128cd63af4c390", "max": 1616.0, "min": 0.0, "orientation": "horizontal", "style": "IPY_MODEL_dc419b60dab84016ac27411608e8adaa", "value": 1616.0}}, "70ef7a049f204e8abe2fe775c98882bb": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "0ffe896fdf594530a87e7db00fa5863a": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "48e01ff84e244b1e995cbe3af1352605": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HTMLView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_70ef7a049f204e8abe2fe775c98882bb", "placeholder": "\u200b", "style": "IPY_MODEL_0ffe896fdf594530a87e7db00fa5863a", "value": " 4.02k/? [00:00&lt;00:00, 4.34kB/s]"}}, "562b135b8bc34fd0a34eae01bdea9638": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "8cf9b2f9b4044a7fa4646ecdc79fde8f": {"model_name": "HBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_277abfbae7f745f3a229b3ab97b35b17", "IPY_MODEL_48e01ff84e244b1e995cbe3af1352605"], "layout": "IPY_MODEL_562b135b8bc34fd0a34eae01bdea9638"}}, "beb16519884942d1a855d963c2cc7207": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "2f39d2e96bc047348e36daa799c0d8a0": {"model_name": "ProgressStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "bar_color": null, "description_width": "initial"}}, "7128770925c6446bab7f6d0a676b4159": {"model_name": "FloatProgressModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ProgressView", "bar_style": "success", "description": "Downloading: ", "description_tooltip": null, "layout": "IPY_MODEL_beb16519884942d1a855d963c2cc7207", "max": 1195.0, "min": 0.0, "orientation": "horizontal", "style": "IPY_MODEL_2f39d2e96bc047348e36daa799c0d8a0", "value": 1195.0}}, "4cf7707cc5b9461093ead9fb2ae9e66c": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "18c3d5f5ee774b4caba1af51b2df65ab": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "215696bcedd84fd8a6dd311f79365aa5": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HTMLView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_4cf7707cc5b9461093ead9fb2ae9e66c", "placeholder": "\u200b", "style": "IPY_MODEL_18c3d5f5ee774b4caba1af51b2df65ab", "value": " 3.35k/? [00:00&lt;00:00, 38.2kB/s]"}}, "c19be3a9dcdf4cdca8ff44a4ed6f8de1": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "dc709e26d02e468f86dd3a517c8dee6d": {"model_name": "HBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_7128770925c6446bab7f6d0a676b4159", "IPY_MODEL_215696bcedd84fd8a6dd311f79365aa5"], "layout": "IPY_MODEL_c19be3a9dcdf4cdca8ff44a4ed6f8de1"}}}, "version_major": 2, "version_minor": 0}
 </script>
 
