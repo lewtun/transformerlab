@@ -144,3 +144,7 @@ checkpoints/
 models/
 squad/
 runs/
+
+# Haystack
+elasticsearch*
+data/
