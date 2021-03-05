@@ -148,3 +148,4 @@ runs/
 # Haystack
 elasticsearch*
 data/
+mlruns/
