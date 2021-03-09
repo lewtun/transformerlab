@@ -23,7 +23,8 @@ index = {"prepare_train_features": "01_question-answering.ipynb",
          "BertIntermediate": "02_pruning.ipynb",
          "BertOutput": "02_pruning.ipynb",
          "BertPooler": "02_pruning.ipynb",
-         "TopKBinarizer": "02_pruning.ipynb"}
+         "TopKBinarizer": "02_pruning.ipynb",
+         "MaskedBertForSequenceClassification": "02_pruning.ipynb"}
 
 modules = ["question_answering.py",
            "pruning.py"]
